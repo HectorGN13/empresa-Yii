@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\EntryForm;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -135,5 +136,21 @@ class SiteController extends Controller
     public function actionDecir($mensaje = 'Hola')
     {
         return $this->render('decir', ['mensaje' => $mensaje]);
+    }
+
+    /**
+     * Método que valida los datos recibidos en el modelo, en el caso de que haya
+     * algun error de validación, la página mostrada es la que se mostró inicialmente.
+     * @return string
+     */
+    public function actionEntry()
+    {
+        $model = new EntryForm;
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            return $this->render('entry-confirm', ['model' => $model]);
+        } else {
+            return $this->render('entry', ['model' => $model]);
+        }
     }
 }
