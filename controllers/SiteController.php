@@ -125,4 +125,15 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+
+    /**
+     * Método con el que empezar a aprender a usar Yii. El típico hola mundo.
+     * @param string $mensaje
+     * @return string
+     */
+    public function actionDecir($mensaje = 'Hola')
+    {
+        return $this->render('decir', ['mensaje' => $mensaje]);
+    }
 }
